@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>JSX Exercise</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX Exercise</title>
 
-		<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-		<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-		<script src="https://unpkg.com/@babel/standalone@7.12.3/babel.min.js"></script>
-	</head>
-	<body>
-		<div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.3/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-		<script src="App.js" type="text/jsx"></script>
-	</body>
+    <script type="text/babel" data-presets="react">
+      function App() {
+        const spacePhenomena = [
+          { id: 1, name: "Asteroid Belt", emoji: "☄️" },
+          { id: 2, name: "Galactic Nebula", emoji: "🌌" },
+          { id: 3, name: "Black Hole", emoji: "🕳️" },
+          { id: 4, name: "Supernova Explosion", emoji: "💥" },
+          { id: 5, name: "Pulsar", emoji: "⚡" },
+          { id: 6, name: "Quasar", emoji: "💫" },
+          { id: 7, name: "Exoplanet", emoji: "🪐" },
+          { id: 8, name: "Interstellar Cloud", emoji: "☁️" },
+          { id: 9, name: "Gamma-Ray Burst", emoji: "🌠" },
+          { id: 10, name: "Magnetic Field Reversal", emoji: "🧲" },
+        ];
+
+        const observationStatuses = ["🔭 Visible", "🌫 Faint", "🚀 Prime for Study"];
+
+        function getRandomStatus() {
+          const index = Math.floor(Math.random() * observationStatuses.length);
+          return observationStatuses[index];
+        }
+
+        return (
+          <div>
+            <h1>Space Phenomena Tracker</h1>
+            <ul>
+              {spacePhenomena.map((item) => {
+                const status = getRandomStatus();
+                const isPrime = status === "🚀 Prime for Study";
+
+                return (
+                  <li key={item.id}>
+                    {item.emoji} {item.name} - {status}
+                    {isPrime && <span> ⚙️ Bring your advanced equipment!</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
 </html>
